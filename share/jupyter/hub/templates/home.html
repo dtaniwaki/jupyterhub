@@ -5,11 +5,19 @@
 <div class="container">
   <div class="row">
     <div class="text-center">
-      {% if user.running %}
-      <a id="stop" role="button" class="btn btn-lg btn-danger">Stop My Server</a>
+      {% if user.running or user.pending %}
+      <a id="stop" role="button" class="btn btn-lg btn-danger">
+        Stop My
+        {% if user.pending %}
+          Pending
+        {% endif %}
+        Server
+      </a>
       {% endif %}
-      <a id="start"role="button" class="btn btn-lg btn-success" href="{{ url }}">
-      {% if not user.running %}
+      <a id="start" role="button" class="btn btn-lg btn-success" href="{{ url }}">
+      {% if user.pending %}
+      Restart
+      {% elif not user.running %}
       Start
       {% endif %}
         My Server
